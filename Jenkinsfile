@@ -32,8 +32,9 @@ pipeline {
                         
                         // Acá se ejecuta el código correspondiente al trivia
                         
-                        git branch: 'main', url: 'https://github.com/nachofranco17/Entregable1ProgAvanzada.git', credentialsId: '78df2a95-b0e2-4953-91dc-eaa531d7c2c0'
-                        bat 'C:\\Users\\ignac\\AppData\\Local\\Programs\\Python\\Python310\\python.exe Principal.py'
+                        dir('Entregable1') {
+                            bat 'C:\\Users\\ignac\\AppData\\Local\\Programs\\Python\\Python310\\python.exe Principal.py'
+                        }
                         
                     } else if (params.Opcion == 'Procesar Pedidos') {
                         
