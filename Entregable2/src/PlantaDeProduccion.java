@@ -37,6 +37,7 @@ public class PlantaDeProduccion {
             ProductorDePaquetes productor = new ProductorDePaquetes(productorExecutor, colaDePedidos);
             ConsumidorDePaquetes consumidor = new ConsumidorDePaquetes(consumidorExecutor, colaDePedidos, NUM_THREADS_CONS, DURACION_MIN_TAREA, DURACION_MAX_TAREA);
 
+            System.out.println("probando con los primeros commits en intellij");
             consumidor.iniciarConsumo();
 
             try {
