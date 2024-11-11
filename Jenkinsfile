@@ -32,11 +32,8 @@ pipeline {
                         
                         // Acá se ejecuta el código correspondiente al trivia
                         
-                        git branch: 'ArchivosE1', url: 'https://github.com/nachofranco17/Entregable1ProgAvanzada.git'
-                        echo "$PATH"
+                        git branch: 'main', url: 'https://github.com/nachofranco17/Entregable1ProgAvanzada.git', credentialsId: '78df2a95-b0e2-4953-91dc-eaa531d7c2c0'
                         bat 'C:\\Users\\ignac\\AppData\\Local\\Programs\\Python\\Python310\\python.exe Principal.py'
-                        
-                        // Posible solución? "C:\\Users\\ignac\\AppData\\Local\\Programs\\Python\\Python310\\python.exe"
                         
                     } else if (params.Opcion == 'Procesar Pedidos') {
                         
