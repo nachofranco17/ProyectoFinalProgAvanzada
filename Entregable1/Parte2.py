@@ -7,7 +7,8 @@ from itertools import chain
 from ClaseMaybe import Maybe, control
 
 # Se lee el csv. Lo de latin-1 es para que no de error al leer el archivo
-dataset = pd.read_csv("JEOPARDY_CSV.csv", encoding ='latin-1')
+# Tuvimos que especificar en qué carpeta estaba el csv porque sino no lo encontraba
+dataset = pd.read_csv("Entregable1\JEOPARDY_CSV.csv", encoding ='latin-1')
 
 # Esto es para que muestre todo el contenido de las columnas en caso que se precise
 pd.set_option('display.max_colwidth', None)
@@ -60,7 +61,10 @@ def partida(k: int = 5, pun: int = 0, prem: int = 0, contador: int = 0) -> None:
 
 def hacer_pregunta(n: int) -> Tuple[str, List[str]]:
     opciones_usuario = mostrar_pregunta(n)
-    respuesta = input(f"{separación}\nRespuesta: ")
+    
+    # Acá vamos a hacer que la respuesta sea siempre "a" porque en Jenkins no podemos ingresar una respuesta
+    print(f"{separación}\nRespuesta: a")
+    respuesta = 'a'
     
     return (respuesta, opciones_usuario)
 
