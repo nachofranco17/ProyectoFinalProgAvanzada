@@ -20,7 +20,15 @@ pipeline {
                 }
             }
         }
-        
+
+        stage('Instalar Dependencias') {
+            steps {
+                dir('Entregable1') {
+                    bat 'C:\\Users\\ignac\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -m pip install -r requirements.txt'
+                }
+            }
+        }
+
         stage('Ejecutar Opción Seleccionada') {
             steps {
                 script {
