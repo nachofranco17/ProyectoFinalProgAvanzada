@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import time
+import os
 from VariablesGlobales import separación
 from typing import List, Tuple, Callable
 from itertools import chain
@@ -8,7 +9,9 @@ from ClaseMaybe import Maybe, control
 
 # Se lee el csv. Lo de latin-1 es para que no de error al leer el archivo
 # Tuvimos que especificar en qué carpeta estaba el csv porque sino no lo encontraba
-dataset = pd.read_csv("Entregable1\JEOPARDY_CSV.csv", encoding ='latin-1')
+current_dir = os.path.dirname(os.path.abspath(__file__))
+csv_path = os.path.join(current_dir, "JEOPARDY_CSV.csv")
+dataset = pd.read_csv(csv_path, encoding ='latin-1')
 
 # Esto es para que muestre todo el contenido de las columnas en caso que se precise
 pd.set_option('display.max_colwidth', None)
