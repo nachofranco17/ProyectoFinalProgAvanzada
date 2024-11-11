@@ -40,4 +40,8 @@ def error_a_menu() -> Callable:
     return menu_principal()
 
 if __name__ == '__main__':
-    menu_principal()
+    # Para probarlo en Jenkins, en vez de llamar al menu_principal llamamos a inicio
+    # directamente porque no podemos ingresar una entrada.
+    
+    #menu_principal()
+    inicio()
