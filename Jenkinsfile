@@ -56,9 +56,6 @@ pipeline {
                         
                         // Acá se ejecuta el código correspondiente al procesamiento de pedidos
                         
-                        // sh 'git clone https://github.com/tu_usuario/entregable2_pedidos.git'
-                        // sh 'python entregable2_pedidos/main.py'
-                        
                     } else if (params.Opcion == 'Consultas USQL') {
                         
                         echo "--------------------------------------"
