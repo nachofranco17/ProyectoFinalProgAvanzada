@@ -35,7 +35,7 @@ pipeline {
                     if (params.Opcion == 'Trivia') {
                         
                         echo "--------------------------------------"
-                        echo 'Ejecutando el juego de Trivia...I1'
+                        echo 'Ejecutando el juego de Trivia...'
                         echo "--------------------------------------"
                         
                         // Acá se ejecuta el código correspondiente al trivia
