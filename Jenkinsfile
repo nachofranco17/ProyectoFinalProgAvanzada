@@ -55,7 +55,12 @@ pipeline {
                         echo "--------------------------------------"
                         
                         // Acá se ejecuta el código correspondiente al procesamiento de pedidos
-                        
+
+                        dir('Entregable2/src') {
+                            bat 'javac PlantaDeProduccion.java'
+                            bat 'java PlantaDeProduccion'
+                        }
+
                     } else if (params.Opcion == 'Consultas USQL') {
                         
                         echo "--------------------------------------"
