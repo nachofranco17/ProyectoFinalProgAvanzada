@@ -24,7 +24,7 @@ pipeline {
         stage('Instalar Dependencias') {
             steps {
                 dir('Entregable1') {
-                    bat 'python -m pip install -r requirements.txt'
+                    bat 'C:\\Users\\ignac\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -m pip install -r requirements.txt'
                 }
             }
         }
@@ -41,7 +41,7 @@ pipeline {
                         // Acá se ejecuta el código correspondiente al trivia
                         
                         dir('Entregable1') {
-                            bat 'python Principal.py'
+                            bat 'C:\\Users\\ignac\\AppData\\Local\\Programs\\Python\\Python310\\python.exe Principal.py'
                         }
                         
                     } else if (params.Opcion == 'Procesar Pedidos') {
