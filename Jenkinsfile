@@ -24,6 +24,8 @@ pipeline {
         stage('Instalar Dependencias') {
             steps {
                 dir('Entregable1') {
+
+                    // Acá tuve que poner la ubicación entera de python.exe porque no me lo reconocía como comando
                     bat 'C:\\Users\\ignac\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -m pip install -r requirements.txt'
                 }
             }
@@ -41,6 +43,8 @@ pipeline {
                         // Acá se ejecuta el código correspondiente al trivia
                         
                         dir('Entregable1') {
+
+                            // Mismo tema con la ubicación de python.exe
                             bat 'C:\\Users\\ignac\\AppData\\Local\\Programs\\Python\\Python310\\python.exe Principal.py'
                         }
                         
