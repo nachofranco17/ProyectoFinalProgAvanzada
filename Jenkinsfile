@@ -68,9 +68,15 @@ pipeline {
                         echo "--------------------------------------"
                         
                         // Acá se ejecuta el código correspondiente a las consultas USQL
-                        
-                        // sh 'git clone https://github.com/tu_usuario/entregable3_usql.git'
-                        // sh 'python entregable3_usql/main.py'
+
+                        dir('Entregable3') {
+                            bat 'C:\\Users\\ignac\\AppData\\Local\\Programs\\Python\\Python310\\python.exe TraductorConsultas.py'
+        
+                        // Estando adentro de la carpeta Entregable3, se ejecuta LexerMain.py
+                            dir('Lexer') {
+                                bat 'C:\\Users\\ignac\\AppData\\Local\\Programs\\Python\\Python310\\python.exe LexerMain.py'
+                            }
+                        }
                     }
                 }
             }
