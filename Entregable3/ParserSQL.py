@@ -133,7 +133,7 @@ def p_expression(p):
     '''expression : operand comparador operand
                   | operand BETWEEN operand AND operand'''
     if len(p) == 4:
-        p[0] = (p[2], p[1], p[3])
+        p[0] = (p[1], p[2], p[3])
     else:
         p[0] = ('BETWEEN', p[1], p[3], p[5])
 
@@ -189,11 +189,24 @@ def p_delete_statement(p):
 def p_alter_table_statement(p):
     '''alter_table_statement : ALTER_TABLE identifier ADD_COLUMN column_definition PUNTO_Y_COMA
                              | ALTER_TABLE identifier DROP_COLUMN identifier PUNTO_Y_COMA'''
-    if p[3] == 'ADD_COLUMN':
+    
+    if p[3] == 'ADD COLUMN':
         p[0] = ('ALTER_TABLE_ADD', p[2], p[4])
-    else:
+    elif p[3] == 'DROP COLUMN':
         p[0] = ('ALTER_TABLE_DROP', p[2], p[4])
         
+def p_create_table_statement(p):
+    '''create_table_statement : CREATE_TABLE identifier PARENIZQ column_definition_list PARENDER PUNTO_Y_COMA'''
+    p[0] = ('CREATE_TABLE', p[2], p[4])
+    
+def p_column_definition_list(p):
+    '''column_definition_list : column_definition
+                              | column_definition COMA column_definition_list'''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = [p[1]] + p[3]
+
 def p_column_definition(p):
     '''column_definition : identifier data_type column_constraints'''
     p[0] = (p[1], p[2], p[3])

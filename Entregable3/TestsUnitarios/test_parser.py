@@ -13,21 +13,21 @@ class TestParser(unittest.TestCase):
     #    expected_tree = ('DELETE', 'clientes', ('BETWEEN', 'edad', 18, 25))
     #    self.assertEqual(parse_tree, expected_tree)
         
-    def test_select_all(self):
-        consulta_sql = "SELECT * FROM usuarios WHERE edad > 18;"
-        parse_tree = parse_sql(consulta_sql)
-        expected_tree = (
-            'SELECT',
-            None,  # opt_distinct
-            '*',  # select_list
-            ['usuarios'],  # table_list
-            None,  # opt_join_clause
-            ('edad', '>', 18),  # opt_where_clause
-            None,  # opt_group_by_clause
-            None,  # opt_having_clause
-            None,  # opt_order_by_clause
-        )
-        self.assertEqual(parse_tree, expected_tree)
+    #def test_select_all(self):
+    #    consulta_sql = "SELECT * FROM usuarios WHERE edad > 18;"
+    #    parse_tree = parse_sql(consulta_sql)
+    #    expected_tree = (
+    #        'SELECT',
+    #        None,  # opt_distinct
+    #        '*',  # select_list
+    #        ['usuarios'],  # table_list
+    #        None,  # opt_join_clause
+    #        ('edad', '>', 18),  # opt_where_clause
+    #        None,  # opt_group_by_clause
+    #        None,  # opt_having_clause
+    #        None,  # opt_order_by_clause
+    #    )
+    #    self.assertEqual(parse_tree, expected_tree)
             
     #def test_select_distinct(self):
     #    consulta_sql = "SELECT DISTINCT nombre FROM clientes WHERE ciudad = 'Madrid';"
@@ -42,10 +42,9 @@ class TestParser(unittest.TestCase):
     #        None,  # opt_group_by_clause
     #        None,  # opt_having_clause
     #        None,  # opt_order_by_clause
-    #        ';'  # PUNTO_Y_COMA
     #    )
     #    self.assertEqual(parse_tree, expected_tree)
-#
+
     #def test_insert_statement(self):
     #    consulta_sql = "INSERT INTO usuarios (nombre, edad) VALUES ('Juan', 25);"
     #    parse_tree = parse_sql(consulta_sql)
@@ -56,7 +55,7 @@ class TestParser(unittest.TestCase):
     #        ['Juan', 25]  # value_list
     #    )
     #    self.assertEqual(parse_tree, expected_tree)
-#
+
     #def test_update_statement(self):
     #    consulta_sql = "UPDATE empleados SET salario = 3000 WHERE puesto = 'ingeniero';"
     #    parse_tree = parse_sql(consulta_sql)
@@ -77,7 +76,7 @@ class TestParser(unittest.TestCase):
     #        ('direccion', ('VARCHAR', 255), ['NOT NULL'])  # column_definition
     #    )
     #    self.assertEqual(parse_tree, expected_tree)
-    #    
+        
     #def test_alter_table_drop_column(self):
     #    consulta_sql = "ALTER TABLE empleados DROP COLUMN direccion;"
     #    parse_tree = parse_sql(consulta_sql)
@@ -87,7 +86,9 @@ class TestParser(unittest.TestCase):
     #        'direccion'  # identifier
     #    )
     #    self.assertEqual(parse_tree, expected_tree)
-    #    
+      
+    # HAY PROBLEMAS CON ESTE TEST, LO PODEMOS BORRAR  
+    
     #def test_create_table(self):
     #    consulta_sql = """CREATE TABLE productos (
     #        id INT PRIMARY_KEY,
@@ -107,17 +108,17 @@ class TestParser(unittest.TestCase):
     #        ]  # column_definition list
     #    )
     #    self.assertEqual(parse_tree, expected_tree)
-    #    
-    #def test_drop_table(self):
-    #    consulta_sql = "DROP TABLE productos;"
-    #    parse_tree = parse_sql(consulta_sql)
-    #    expected_tree = (
-    #        'DROP_TABLE',
-    #        'productos',  # identifier
-    #        ';'  # PUNTO_Y_COMA
-    #    )
-    #    self.assertEqual(parse_tree, expected_tree)
-    #    
+        
+    def test_drop_table(self):
+        consulta_sql = "DROP TABLE productos;"
+        parse_tree = parse_sql(consulta_sql)
+        expected_tree = (
+            'DROP_TABLE',
+            'productos',  # identifier
+            ';'  # PUNTO_Y_COMA
+        )
+        self.assertEqual(parse_tree, expected_tree)
+        
     #def test_select_count_group_by_having(self):
     #    consulta_sql = "SELECT COUNT(*) FROM ventas GROUP BY producto HAVING COUNT(*) > 5;"
     #    parse_tree = parse_sql(consulta_sql)

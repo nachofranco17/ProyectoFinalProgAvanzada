@@ -115,7 +115,7 @@ def translate_query(usql_query, translation_dict):
 
 def translate_usql_to_sql(usql_query):
     sql_query = translate_query(usql_query, usql_to_sql)
-    print(separacion,"\nUSQL Query:", usql_query)
+    print("USQL Query:", usql_query)
     print("\nSQL Query traducida:", sql_query)
     
     try:
