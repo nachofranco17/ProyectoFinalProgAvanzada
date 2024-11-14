@@ -3,5 +3,3 @@ class TranslationError(Exception):
 
 class LexerError(Exception):
     pass
-
-# ... otras excepciones si es necesario ...
