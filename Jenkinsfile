@@ -89,16 +89,9 @@ pipeline {
             echo 'Pipeline completado con éxito'
             echo "--------------------------------------"
 
-            mail:
+            mail to: 'ignaciofrancouy@gmail.com',
                 subject: "Pipeline completado con éxito",
-                body: """Opción seleccionada: ${params.Opcion}
-                Los detalles de la ejecución se pueden ver en Jenkins.""",
-            
-                to: 'ignaciofrancouy@gmail.com'
-                // recipientProviders: [[$class: 'RequesterRecipientProvider']]
-
-                // Si no se manda el mail, se puede usar:
-                // to: 'nombre@ejemplo.com' en lugar de la línea del recipientProviders
+                body: "Opción seleccionada: ${params.Opcion}\nLos detalles de la ejecución se pueden ver en Jenkins."
         
         }
         failure {
@@ -106,14 +99,9 @@ pipeline {
             echo 'Hubo un error en el pipeline.'
             echo "--------------------------------------"
 
-            mail:
+            mail to: 'ignaciofrancouy@gmail.com',
                 subject: "Error en el pipeline",
-                body: """Hubo un error durante la ejecución del pipeline.
-                
-                Opción seleccionada: ${params.Opcion}
-                
-                Revise los detalles de la ejecución en Jenkins para más información.""",
-                recipientProviders: [[$class: 'RequesterRecipientProvider']]
+                body: "Hubo un error durante la ejecución del pipeline.\nOpción seleccionada: ${params.Opcion}\nRevise los detalles de la ejecución en Jenkins para más información."
         }
     }
 }
