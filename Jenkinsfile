@@ -86,7 +86,7 @@ pipeline {
     post {
         success {
             echo "--------------------------------------"
-            echo 'Pipeline completado con éxito.'
+            echo 'Pipeline completado con éxito,entrando a emailext.'
             echo "--------------------------------------"
 
             emailext (
