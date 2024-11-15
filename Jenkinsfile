@@ -95,7 +95,6 @@ pipeline {
             Los detalles de la ejecución se pueden ver en Jenkins.""",
             
             to: 'ignaciofrancouy@gmail.com'
-            from: 'ignaciofrancouy@gmail.com'
             // recipientProviders: [[$class: 'RequesterRecipientProvider']]
 
             // Si no se manda el mail, se puede usar:
