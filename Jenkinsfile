@@ -89,33 +89,31 @@ pipeline {
             echo 'Pipeline completado con éxito'
             echo "--------------------------------------"
 
-            mail (
-            subject: "Pipeline completado con éxito",
-            body: """Opción seleccionada: ${params.Opcion}
-            Los detalles de la ejecución se pueden ver en Jenkins.""",
+            mail:
+                subject: "Pipeline completado con éxito",
+                body: """Opción seleccionada: ${params.Opcion}
+                Los detalles de la ejecución se pueden ver en Jenkins.""",
             
-            to: 'ignaciofrancouy@gmail.com'
-            // recipientProviders: [[$class: 'RequesterRecipientProvider']]
+                to: 'ignaciofrancouy@gmail.com'
+                // recipientProviders: [[$class: 'RequesterRecipientProvider']]
 
-            // Si no se manda el mail, se puede usar:
-            // to: 'nombre@ejemplo.com' en lugar de la línea del recipientProviders
-            
-            ) 
+                // Si no se manda el mail, se puede usar:
+                // to: 'nombre@ejemplo.com' en lugar de la línea del recipientProviders
+        
         }
         failure {
             echo "--------------------------------------"
             echo 'Hubo un error en el pipeline.'
             echo "--------------------------------------"
 
-            mail (
-            subject: "Error en el pipeline",
-            body: """Hubo un error durante la ejecución del pipeline.
-            
-            Opción seleccionada: ${params.Opcion}
-            
-            Revise los detalles de la ejecución en Jenkins para más información.""",
-            recipientProviders: [[$class: 'RequesterRecipientProvider']]
-            )
+            mail:
+                subject: "Error en el pipeline",
+                body: """Hubo un error durante la ejecución del pipeline.
+                
+                Opción seleccionada: ${params.Opcion}
+                
+                Revise los detalles de la ejecución en Jenkins para más información.""",
+                recipientProviders: [[$class: 'RequesterRecipientProvider']]
         }
     }
 }
