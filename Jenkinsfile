@@ -89,15 +89,13 @@ pipeline {
             echo 'Pipeline completado con éxito'
             echo "--------------------------------------"
 
-            emailext (
+            mail (
             subject: "Pipeline completado con éxito",
-            body: """Hubo un error durante la ejecución del pipeline.
-            
-            Opción seleccionada: ${params.Opcion}
-            
+            body: """Opción seleccionada: ${params.Opcion}
             Los detalles de la ejecución se pueden ver en Jenkins.""",
             
             to: 'ignaciofrancouy@gmail.com'
+            from: 'ignaciofrancouy@gmail.com'
             // recipientProviders: [[$class: 'RequesterRecipientProvider']]
 
             // Si no se manda el mail, se puede usar:
@@ -110,7 +108,7 @@ pipeline {
             echo 'Hubo un error en el pipeline.'
             echo "--------------------------------------"
 
-            emailext(
+            mail (
             subject: "Error en el pipeline",
             body: """Hubo un error durante la ejecución del pipeline.
             
