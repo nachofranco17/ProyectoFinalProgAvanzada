@@ -88,11 +88,36 @@ pipeline {
             echo "--------------------------------------"
             echo 'Pipeline completado con éxito.'
             echo "--------------------------------------"
+
+            emailext(
+            subject: "Pipeline completado con éxito",
+            body: """Hubo un error durante la ejecución del pipeline.
+            
+            Opción seleccionada: ${params.Opcion}
+            
+            Los detalles de la ejecución se pueden ver en Jenkins.""",
+            
+            recipientProviders: [[$class: 'RequesterRecipientProvider']]
+
+            // Si no se manda el mail, se puede usar:
+            // to: 'nombre@ejemplo.com' en lugar de la línea del recipientProviders
+            
+            )
         }
         failure {
             echo "--------------------------------------"
             echo 'Hubo un error en el pipeline.'
             echo "--------------------------------------"
+
+            emailext(
+            subject: "Error en el pipeline",
+            body: """Hubo un error durante la ejecución del pipeline.
+            
+            Opción seleccionada: ${params.Opcion}
+            
+            Revise los detalles de la ejecución en Jenkins para más información.""",
+            recipientProviders: [[$class: 'RequesterRecipientProvider']]
+            )
         }
     }
 }

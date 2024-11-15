@@ -1,5 +1,4 @@
 from TraductorConsultas import translate_usql_to_sql, TranslationError, separacion
-from Lexer.LexerMain import get_lexer
 
 class QueryBuilder:
     def __init__(self):
