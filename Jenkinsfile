@@ -89,7 +89,7 @@ pipeline {
             echo 'Pipeline completado con éxito.'
             echo "--------------------------------------"
 
-            emailext
+            emailext(
             subject: "Pipeline completado con éxito",
             body: """Hubo un error durante la ejecución del pipeline.
             
@@ -103,7 +103,7 @@ pipeline {
             // Si no se manda el mail, se puede usar:
             // to: 'nombre@ejemplo.com' en lugar de la línea del recipientProviders
             
-            
+            ) 
         }
         failure {
             echo "--------------------------------------"
