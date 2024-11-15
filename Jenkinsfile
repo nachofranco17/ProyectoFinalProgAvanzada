@@ -90,6 +90,7 @@ pipeline {
             echo "--------------------------------------"
 
             mail to: 'ignaciofrancouy@gmail.com',
+                from: 'jenkins@localhost',
                 subject: "Pipeline completado con éxito",
                 body: "Opción seleccionada: ${params.Opcion}\nLos detalles de la ejecución se pueden ver en Jenkins."
         
@@ -100,6 +101,7 @@ pipeline {
             echo "--------------------------------------"
 
             mail to: 'ignaciofrancouy@gmail.com',
+                from: 'jenkins@localhost',
                 subject: "Error en el pipeline",
                 body: "Hubo un error durante la ejecución del pipeline.\nOpción seleccionada: ${params.Opcion}\nRevise los detalles de la ejecución en Jenkins para más información."
         }
