@@ -14,12 +14,14 @@ def p_statement(p):
                  | insert_statement
                  | update_statement
                  | delete_statement
-                 | alter_table_statement'''
+                 | alter_table_statement
+                 | drop_table_statement
+                 | create_table_statement'''
     p[0] = p[1]
 
 def p_select_statement(p):
-    '''select_statement : SELECT opt_distinct select_list FROM table_list opt_join_clause opt_where_clause opt_group_by_clause opt_having_clause opt_order_by_clause PUNTO_Y_COMA'''
-    p[0] = ('SELECT', p[2], p[3], p[5], p[6], p[7], p[8], p[9], p[10])
+    '''select_statement : SELECT opt_distinct select_list FROM table_list opt_join_clause opt_where_clause opt_group_by_clause opt_having_clause opt_order_by_clause opt_limit_clause PUNTO_Y_COMA'''
+    p[0] = ('SELECT', p[2], p[3], p[5], p[6], p[7], p[8], p[9], p[10], p[11])
  
 def p_opt_order_by_clause(p):
     '''opt_order_by_clause : ORDER_BY column_list
@@ -27,7 +29,15 @@ def p_opt_order_by_clause(p):
     if len(p) == 3:
         p[0] = ('ORDER_BY', p[2])
     else:
-        p[0] = None 
+        p[0] = None
+
+def p_opt_limit_clause(p):
+    '''opt_limit_clause : LIMIT NUM
+                        | empty'''
+    if len(p) == 3:
+        p[0] = ('LIMIT', p[2])
+    else:
+        p[0] = None
     
 def p_opt_distinct(p):
     '''opt_distinct : DISTINCT
@@ -151,7 +161,8 @@ def p_comparador(p):
                   | MENOR_QUE
                   | MAYOR_IGUAL
                   | MENOR_IGUAL
-                  | DIFERENTE'''
+                  | DIFERENTE
+                  | LIKE'''
     p[0] = p[1]
     
 def p_insert_statement(p):
@@ -195,6 +206,10 @@ def p_alter_table_statement(p):
     elif p[3] == 'DROP COLUMN':
         p[0] = ('ALTER_TABLE_DROP', p[2], p[4])
         
+def p_drop_table_statement(p):
+    '''drop_table_statement : DROP_TABLE identifier PUNTO_Y_COMA'''
+    p[0] = ('DROP_TABLE', p[2])
+        
 def p_create_table_statement(p):
     '''create_table_statement : CREATE_TABLE identifier PARENIZQ column_definition_list PARENDER PUNTO_Y_COMA'''
     p[0] = ('CREATE_TABLE', p[2], p[4])
@@ -231,7 +246,8 @@ def p_constraint(p):
     '''constraint : NOT_NULL
                   | UNIQUE
                   | PRIMARY_KEY
-                  | FOREIGN_KEY'''
+                  | FOREIGN_KEY
+                  | DEFAULT value'''
     p[0] = p[1]
     
 def p_identifier(p):

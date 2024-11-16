@@ -120,7 +120,7 @@ def translate_usql_to_sql(usql_query):
     
     try:
         parse_sql(sql_query)
-        print("La consulta es válida y fue traducida correctamente.\n", separacion)
+        print("La consulta es válida y fue traducida correctamente.\n" + separacion)
     except SyntaxError as e:
         raise TranslationError(f"Consulta SQL inválida: {e}")
     return sql_query
