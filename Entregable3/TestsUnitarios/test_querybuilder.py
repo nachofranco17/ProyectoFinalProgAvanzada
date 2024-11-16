@@ -51,6 +51,112 @@ class TestQueryBuilder(unittest.TestCase):
         expected_query = ("TRAEME TODO DE LA TABLA pedidos MEZCLANDO clientes EN "
                           "pedidos.cliente_id = clientes.id DONDE clientes.ciudad = 'Barcelona';")
         self.assertEqual(query, expected_query)
+        
+    def test_group_by_having_query(self):
+        query = (QueryBuilder()
+                 .traeme('categoria', 'SUM(precio)')
+                 .de_la_tabla('productos')
+                 .agrupando_por('categoria')
+                 .where_del_group_by('SUM(precio) > 1000')
+                 .build())
+        expected_query = ("TRAEME categoria, SUM(precio) DE LA TABLA productos "
+                          "AGRUPANDO POR categoria WHERE DEL GROUP BY SUM(precio) > 1000;")
+        self.assertEqual(query, expected_query)
+    
+    # PROBLEMA 1    
+    #def test_count_distinct_query(self):
+    #    query = (QueryBuilder()
+    #             .contando('DISTINCT usuario_id')
+    #             .de_la_tabla('ventas')
+    #             .build())
+    #    expected_query = "CONTANDO(DISTINCT usuario_id) DE LA TABLA ventas;"
+    #    self.assertEqual(query, expected_query)
+        
+    def test_order_by_limit_query(self):
+        query = (QueryBuilder()
+                 .traeme('nombre', 'edad')
+                 .de_la_tabla('usuarios')
+                 .ordena_por('edad')
+                 .como_mucho('10')
+                 .build())
+        expected_query = "TRAEME nombre, edad DE LA TABLA usuarios ORDENA POR edad COMO MUCHO 10;"
+        self.assertEqual(query, expected_query)
+    
+    # PROBLEMA 2   
+    #def test_create_table_query(self):
+    #    query = (QueryBuilder()
+    #             .crea_la_tabla('productos')
+    #             .agrega_la_columna('id INT CLAVE PRIMA')
+    #             .agrega_la_columna('nombre VARCHAR(100) UNICO')
+    #             .agrega_la_columna('precio INT POR DEFECTO 0')
+    #             .agrega_la_columna('categoria VARCHAR(50) NO NULO')
+    #             .build())
+    #    expected_query = ("CREA LA TABLA productos AGREGA LA COLUMNA id INT CLAVE PRIMA, "
+    #                      "nombre VARCHAR(100) UNICO, precio INT POR DEFECTO 0, "
+    #                      "categoria VARCHAR(50) NO NULO;")
+    #    self.assertEqual(query, expected_query)
+    
+    def test_drop_table_query(self):
+        query = (QueryBuilder()
+                 .tira_la_tabla('productos')
+                 .build())
+        expected_query = "TIRA LA TABLA productos;"
+        self.assertEqual(query, expected_query)
+        
+    def test_alter_table_add_drop_column(self):
+        query = (QueryBuilder()
+                 .cambia_la_tabla('empleados')
+                 .agrega_la_columna('direccion VARCHAR(255) NO NULO')
+                 .elimina_la_columna('telefono')
+                 .build())
+        expected_query = ("CAMBIA LA TABLA empleados AGREGA LA COLUMNA direccion VARCHAR(255) NO NULO "
+                          "ELIMINA LA COLUMNA telefono;")
+        self.assertEqual(query, expected_query)
+    
+    def test_between_condition_query(self):
+        query = (QueryBuilder()
+                 .traeme('nombre')
+                 .de_la_tabla('clientes')
+                 .condicion_entre('edad', '18', '25')
+                 .build())
+        expected_query = "TRAEME nombre DE LA TABLA clientes DONDE edad ENTRE 18 Y 25;"
+        self.assertEqual(query, expected_query)
+        
+    def test_like_condition_query(self):
+        query = (QueryBuilder()
+                 .traeme('nombre')
+                 .de_la_tabla('clientes')
+                 .parecido_a('nombre', 'J%')
+                 .build())
+        expected_query = "TRAEME nombre DE LA TABLA clientes DONDE nombre PARECIDO A 'J%';"
+        self.assertEqual(query, expected_query)
+        
+    def test_null_conditions_query(self):
+        query = (QueryBuilder()
+                 .traeme('nombre')
+                 .de_la_tabla('clientes')
+                 .es_nulo('direccion')
+                 .build())
+        expected_query = "TRAEME nombre DE LA TABLA clientes DONDE direccion ES NULO;"
+        self.assertEqual(query, expected_query)
+
+        query = (QueryBuilder()
+                 .traeme('nombre')
+                 .de_la_tabla('clientes')
+                 .no_nulo('email')
+                 .build())
+        expected_query = "TRAEME nombre DE LA TABLA clientes DONDE email NO NULO;"
+        self.assertEqual(query, expected_query)
+        
+    def test_from_existing_query(self):
+        existing_query = "TRAEME * DE LA TABLA ventas"
+        query = (QueryBuilder()
+                 .from_existing(existing_query)
+                 .donde("fecha > '2022-01-01'")
+                 .ordena_por('fecha')
+                 .build())
+        expected_query = "TRAEME * DE LA TABLA ventas DONDE fecha > '2022-01-01' ORDENA POR fecha;"
+        self.assertEqual(query, expected_query)
            
 if __name__ == '__main__':
     unittest.main()

@@ -16,7 +16,7 @@ def get_lexer():
     return lexer
 
 # Lista de consultas para probar
-if __name__ == "__main__":
+def probarConsultas(): # pragma: no cover
     consultas = [
         # Consulta 1
         "TRAEME TODO DE LA TABLA usuarios DONDE edad > 18;",
@@ -54,6 +54,9 @@ if __name__ == "__main__":
         lexer.input(consulta)
         for tok in lexer:
             print(tok)
+            
+if __name__ == '__main__':
+    probarConsultas()
         
         
         
