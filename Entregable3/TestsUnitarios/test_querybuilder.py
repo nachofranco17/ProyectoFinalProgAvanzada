@@ -62,15 +62,6 @@ class TestQueryBuilder(unittest.TestCase):
         expected_query = ("TRAEME categoria, SUM(precio) DE LA TABLA productos "
                           "AGRUPANDO POR categoria WHERE DEL GROUP BY SUM(precio) > 1000;")
         self.assertEqual(query, expected_query)
-    
-    # PROBLEMA 1    
-    #def test_count_distinct_query(self):
-    #    query = (QueryBuilder()
-    #             .contando('DISTINCT usuario_id')
-    #             .de_la_tabla('ventas')
-    #             .build())
-    #    expected_query = "CONTANDO(DISTINCT usuario_id) DE LA TABLA ventas;"
-    #    self.assertEqual(query, expected_query)
         
     def test_order_by_limit_query(self):
         query = (QueryBuilder()
@@ -81,20 +72,6 @@ class TestQueryBuilder(unittest.TestCase):
                  .build())
         expected_query = "TRAEME nombre, edad DE LA TABLA usuarios ORDENA POR edad COMO MUCHO 10;"
         self.assertEqual(query, expected_query)
-    
-    # PROBLEMA 2   
-    #def test_create_table_query(self):
-    #    query = (QueryBuilder()
-    #             .crea_la_tabla('productos')
-    #             .agrega_la_columna('id INT CLAVE PRIMA')
-    #             .agrega_la_columna('nombre VARCHAR(100) UNICO')
-    #             .agrega_la_columna('precio INT POR DEFECTO 0')
-    #             .agrega_la_columna('categoria VARCHAR(50) NO NULO')
-    #             .build())
-    #    expected_query = ("CREA LA TABLA productos AGREGA LA COLUMNA id INT CLAVE PRIMA, "
-    #                      "nombre VARCHAR(100) UNICO, precio INT POR DEFECTO 0, "
-    #                      "categoria VARCHAR(50) NO NULO;")
-    #    self.assertEqual(query, expected_query)
     
     def test_drop_table_query(self):
         query = (QueryBuilder()
