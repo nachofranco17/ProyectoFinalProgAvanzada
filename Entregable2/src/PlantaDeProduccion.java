@@ -66,7 +66,7 @@ public class PlantaDeProduccion {
                 System.out.println(separacion + "\nTiempo total de procesamiento: " + TiempoTotal + " segundos | " + consumidor.getPaquetesProcesados() + " paquetes procesados\n" + separacion);
             }
 
-            Path registroPath = Paths.get("Registro7.jfr");
+            Path registroPath = Paths.get("Registro8.jfr");
             Files.createFile(registroPath);
             recording.stop();
             recording.dump(registroPath);
